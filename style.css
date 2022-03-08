@@ -1,0 +1,206 @@
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+
+}
+
+
+body {
+    height: 35%;
+    width: 600px;
+    position: absolute;
+    margin: auto;
+    top: 50px;
+    left: 0;
+    right: 0;
+    padding: 30px 0;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+#title{
+  
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    color: black;
+    /* background: linear-gradient(
+        to right, 
+        rgb(241, 241, 240), 
+        rgb(190, 190, 190)
+      ); */
+
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+#title2{
+    padding: 5px 10px;
+    font-size: 20px;
+}
+
+
+#newtask {
+    margin-top: 20px;
+    position: relative;
+    padding: 10px;
+    background: #fff; 
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}
+
+#newtask input{
+    border-radius: 5px;
+    width: 70%;
+    height: 45px;
+    font-size: 15px;
+    border: 2px solid #d1d3d4;
+    padding: 12px;
+    color: #111111;
+    font-weight: 500;
+    position: relative;
+}
+
+#newtask input:focus{
+    outline: none;
+    border-color: #1c7ab1;
+}
+
+/*Bouton Add*/
+#newtask #push{
+    position: relative;
+    width: 60px;
+    height: 45px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 15px;
+    background: #1c7ab1;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+
+#newtask #push:hover{
+    color: #1c7ab1;
+    border: #1c7ab1 solid 2px;
+    background:#fff;
+    
+}
+
+#pending{
+    width: 100%;
+    position: relative;
+    margin-top: 40px;
+    background: #fff;
+    padding:20px 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}
+
+
+.task{
+    display: flex;
+    background: #fff;
+    height: 50px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-bottom: 2px solid #fff;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.task #taskname {
+    max-width: 400px;
+    text-align: left;
+}
+
+.task span{
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    /* background-color: black; */
+}
+
+/* .task #cpt-button{
+    position: relative;
+    width: 50px;
+    height: 30px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 15px;
+    background: #a8b0b3;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer; 
+} */
+
+.task .areabuttons button{
+    position: relative;
+    width: 50px;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer; 
+}
+
+.task .areabuttons #cpt-button-done{
+    background: rgb(145, 144, 144);
+    color: #fff;
+}
+.task .areabuttons #cpt-button-done:hover{
+    color: rgb(145, 144, 144);
+    border: rgb(145, 144, 144) solid 2px;
+    background:#fff;
+
+}
+.task .areabuttons #cpt-button-del{
+    background: rgba(233, 0, 0, 0.877);
+    color: #fff;
+}
+.task .areabuttons #cpt-button-del:hover{
+    color: rgba(233, 0, 0, 0.877);
+    border: rgba(233, 0, 0, 0.877) solid 2px;
+    background:#fff;
+}
+.task .areabuttons #cpt-button-edit{
+    background: rgba(48, 154, 216, 0.877);
+    color: #fff;
+}
+.task .areabuttons #cpt-button-edit:hover{
+    color: rgba(48, 154, 216, 0.877);
+    border: rgba(48, 154, 216, 0.877) solid 2px;
+    background:#fff;
+
+}
+
+
+#completed{
+    width: 100%;
+    position: relative;
+    margin-top: 30px;
+    background: #fff;
+    padding:20px 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+
+
+img{
+    float: right;
+    margin-left: 10px;
+    cursor: pointer;
+    height: 20px;
+}
+
+
+
