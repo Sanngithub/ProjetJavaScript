@@ -16,32 +16,50 @@ completedTask.appendChild(messageNoTaskComp);
 // on appelle la fonction à chaque fois qu'on refresh la page
 // ce qui nous permet d'afficher les tâches au fur et à mesure
 // cela nous évite de répeter la création du bloc
-function displayTaskingsFromJson() {
 
+function displayTaskingsFromJson() {
+    // par défaut c'est un GET
     fetch(listTasks)
-        .then(function(html){
-            return html.json();
+        .then(function(response){
+            return response.json();
         })
         .then(function(html){
             // alert(html);
             console.log(html);
             
-            // for(task of html){
-    
-            //     messageNoTask.innerHTML = "";
-    
-            //     // console.log(html[key].description);
-            //     const areaTask = document.getElementById('pending');
-            //     areaTask.innerHTML += `<div class="task">
-            //     <span class="classTask" id="taskname">${task.description}</span> 
-            
-            //     <div class="areabuttons">
-            //         <button onclick="taskDone(${task.id})" id="cpt-button-done">Done</button>
-            //         <button onclick="delTask(${task.id})"id="cpt-button-del">Delete</button>
-            //         <button id="cpt-button-edit">Edit</button>
-            //     </div>
-            //     </div>`;
-            // }
+            for(task of html){
+
+                messageNoTask.innerHTML = "";
+                
+                if (task.terminee == false) {
+                    console.log(task);
+                    
+                    const areaTask = document.getElementById('pending');
+                    areaTask.innerHTML += `<div class="task">
+                    <span class="classTask" id="taskname">${task.description}</span> 
+                
+                    <div class="areabuttons">
+                        <button onclick="taskDone(${task.id})" id="cpt-button-done">Done</button>
+                        <button onclick="delTask(${task.id})"id="cpt-button-del">Delete</button>
+                        <button id="cpt-button-edit">Edit</button>
+                    </div>
+                    </div>`;
+                }
+
+                else
+                {
+                    messageNoTaskComp.innerHTML = "";
+                    const areaTask = document.getElementById('completed');
+                    areaTask.innerHTML += `<div class="task">
+                    <span class="classTask" id="taskname">${task.description}</span> 
+                
+                    <div class="areabuttons">
+                        <button onclick="delTask(${task.id})"id="cpt-button-del">Delete</button>
+                        <button id="cpt-button-edit">Edit</button>
+                    </div>
+                    </div>`;
+                }
+            }
     
         })
         .catch(function(err){
@@ -51,8 +69,6 @@ function displayTaskingsFromJson() {
 }
 
 displayTaskingsFromJson();
-
-
 
 
 
@@ -120,6 +136,7 @@ function pushTask() {
     
 }
     
+
 function delTask(id) {
 
     console.log(id);
