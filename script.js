@@ -25,7 +25,7 @@ function displayTaskingsFromJson() {
         })
         .then(function(html){
             // alert(html);
-            console.log(html);
+            console.log("voici mon HTML",html);
             
             for(task of html){
 
@@ -38,7 +38,7 @@ function displayTaskingsFromJson() {
                     <span class="classTask" id="taskname">${task.description}</span> 
                 
                     <div class="areabuttons">
-                        <button onclick="taskDone(${task.id},${task.terminee})" id="cpt-button-done">Done</button>
+                        <button onclick="taskDone(${task.id})" id="cpt-button-done">Done</button>
                         <button onclick="delTask(${task.id})"id="cpt-button-del">Delete</button>
                         <button id="cpt-button-edit">Edit</button>
                     </div>
@@ -106,8 +106,6 @@ function addTask() {
             // alert(html);
             console.log(html);
             
-         
-
             messageNoTask.innerHTML = "";
 
             // console.log(html[key].description);
@@ -135,22 +133,21 @@ function addTask() {
     
 }
 
-function taskDone(id, terminee){
+function taskDone(id){
     
     //===============  VERSION WEB DE "TERMINEE" : ============================
 
-    fetch(`http://localhost:9090/api/taches/${id}/terminee`, {
-        mode: 'no-cors',
+    fetch(`http://localhost:9090/api/taches/${id}/terminer`, {
+        // mode: 'no-cors',
         method: 'PUT',  
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
           },
     }).then(function(response)
     {
         console.log(response);
     })
-    // window.location.reload();
+    window.location.reload();
 
 
 
