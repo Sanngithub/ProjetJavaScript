@@ -24,7 +24,7 @@ body {
 #title{
   
     text-align: center;
-    padding: 10px;
+    /* padding: 20px; */
     font-size: 20px;
     color: black;
     /* background: linear-gradient(
@@ -34,17 +34,21 @@ body {
       ); */
 
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
 }
 
 #title2{
-    padding: 5px 10px;
+    text-align: left;
+    padding: 30px 0px 0px 0px;
+    margin-left: 5px;
     font-size: 20px;
+    color: black;
+    
 }
 
 
 #newtask {
-    margin-top: 20px;
+    margin-top: 10px;
     position: relative;
     padding: 10px;
     background: #fff; 
@@ -94,7 +98,7 @@ body {
 #pending{
     width: 100%;
     position: relative;
-    margin-top: 40px;
+    margin-top: 10px;
     background: #fff;
     padding:20px 10px;
     border-radius: 5px;
@@ -186,7 +190,7 @@ body {
 #completed{
     width: 100%;
     position: relative;
-    margin-top: 30px;
+    margin-top: 10px;
     background: #fff;
     padding:20px 10px;
     border-radius: 5px;
@@ -203,4 +207,19 @@ img{
 }
 
 
+#messageDansTacheTerminee, #messageDansTacheEnCours{
+    font-size :15px;
+    margin-left: 10px;
+    padding-bottom: 3px;
+    opacity: 0.5;
+}
+
+#blocTitreMessage{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: flex-start
+}
 

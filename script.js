@@ -1,16 +1,6 @@
-const listTasks = 'http://localhost:9090/api/taches';
+const listTasks = 'http://localhost:9090/api/taches/';
 
-
-let pendingTask = document.getElementById('pending');
-let messageNoTask = document.createElement('span');
-messageNoTask.innerHTML = "Aucunes tâches en cours";
-pendingTask.appendChild(messageNoTask);
-
-let completedTask = document.getElementById('completed');
-let messageNoTaskComp = document.createElement('span');
-messageNoTaskComp.innerHTML = "Aucunes tâches terminées";
-completedTask.appendChild(messageNoTaskComp);
-
+let estModifie = false;
 
 // par défaut, la méthode utilisé si on ne le mentionne pas, est 'GET' pour le fetch
 // on appelle la fonction à chaque fois qu'on refresh la page
@@ -18,47 +8,69 @@ completedTask.appendChild(messageNoTaskComp);
 // cela nous évite de répeter la création du bloc
 
 function displayTaskingsFromJson() {
-    // par défaut c'est un GET
+    document.getElementById('task').value = "";
     fetch(listTasks)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(html){
-            // alert(html);
-            console.log("voici mon HTML",html);
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(html){
+        // alert(html);
+        console.log("voici mon HTML ",html);
+        console.log("taille de mon HTML ",html.length);
+        document.getElementById("pending").innerHTML = "";
+        document.getElementById("completed").innerHTML = "";
+        
+        let nbreTacheEnCours= 0;
+        let nbreTacheTerminee= 0;
+    
+        for(task of html){
+
             
-            for(task of html){
-
-                messageNoTask.innerHTML = "";
-                
-                if (task.terminee == false) {
-                    
-                    const areaTask = document.getElementById('pending');
-                    areaTask.innerHTML += `<div class="task">
+            if (task.terminee == false) 
+            {
+                // messageNoTask.innerHTML = "";
+                const areaTask = document.getElementById('pending');
+                areaTask.innerHTML += 
+                `<div class="task" id="zoneTache">
                     <span class="classTask" id="taskname">${task.description}</span> 
-                
+            
                     <div class="areabuttons">
-                        <button onclick="taskDone(${task.id})" id="cpt-button-done">Done</button>
-                        <button onclick="delTask(${task.id})"id="cpt-button-del">Delete</button>
-                        <button id="cpt-button-edit">Edit</button>
+                        <button onclick="tacheTermine(${task.id})" id="cpt-button-done">Done</button>
+                        <button onclick="supprimerTache(${task.id})" id="cpt-button-del">Delete</button>
+                        <button onclick="modifierTache('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
                     </div>
-                    </div>`;
-                }
-
-                else
-                {
-                    messageNoTaskComp.innerHTML = "";
-                    const areaTask = document.getElementById('completed');
-                    areaTask.innerHTML += `<div class="task">
-                    <span class="classTask" id="taskname">${task.description}</span> 
-                
-                    <div class="areabuttons">
-                        <button onclick="delTask(${task.id})"id="cpt-button-del">Delete</button>
-                        <button id="cpt-button-edit">Edit</button>
-                    </div>
-                    </div>`;
-                }
+                </div>`;
+                nbreTacheEnCours += 1;
+            } 
+            else
+            {
+            
+                // messageNoTaskComp.innerHTML = "";
+                const areaTask = document.getElementById('completed');
+                areaTask.innerHTML += `<div class="task" id="zoneTache">
+                <span class="classTask" id="taskname">${task.description}</span> 
+            
+                <div class="areabuttons">
+                    <button onclick="supprimerTache(${task.id})"id="cpt-button-del">Delete</button>
+                </div>
+                </div>`;
+                nbreTacheTerminee += 1;
             }
+        }
+
+        if (nbreTacheEnCours>0){
+            document.getElementById("messageDansTacheEnCours").style.display = 'none';
+        } else{
+            document.getElementById("messageDansTacheEnCours").style.display = 'block';
+        }
+
+        if(nbreTacheTerminee>0){
+            document.getElementById("messageDansTacheTerminee").style.display = 'none';
+        } else {
+            document.getElementById("messageDansTacheTerminee").style.display = 'block';
+        }
+
+      
     
         })
         .catch(function(err){
@@ -71,22 +83,21 @@ displayTaskingsFromJson();
 
 
 
-function addTask() {
+function ajouterTache() 
+{
 
     let myTask = document.getElementById('task').value;
-    if (myTask === "") {
-        console.log("vous na'avez pas saisi de tâche !")
+    if (myTask === "") 
+    {
+        alert("vous na'avez pas saisi de tâche !")
     }
-    else {
+    else
+    {
 
-        // on créé une variable qui récupère la nouvelle tâche 
-        // ici, seulement la description
-        // les autres clefs sont générés automatiquements
-        const newTask = {
-            description: `${myTask}`,
+        let newTask = {
+            description: myTask,
         };
-    
-        // console.log(newTask);
+  
         fetch(listTasks,
         {
             headers: {
@@ -94,234 +105,82 @@ function addTask() {
               'Content-Type': 'application/json'
             },
             method: "POST",
-            // cette partir body, permet d'ajouter dans le Json la nouvelle tâche
-            // sous forme d'une chaine de caractère à la clef 'description'
             body: JSON.stringify(newTask)
 
         })
-        .then(function(html){
+        .then(function(html)
+        {
             return html.json();
-        })
-        .then(function(html){
-            // alert(html);
+        })    
+        .then(function(html)
+        {
             console.log(html);
-            
-            messageNoTask.innerHTML = "";
-
-            // console.log(html[key].description);
-            const areaTask = document.getElementById('pending');
-            areaTask.innerHTML += `<div class="task">
-            <span class="classTask" id="taskname">${myTask}</span> 
-        
-            <div class="areabuttons">
-                <button onclick="taskDone(${task.id})" id="cpt-button-done">Done</button>
-                <button onclick="delTask(${task.id})"id="cpt-button-del">Delete</button>
-                <button id="cpt-button-edit">Edit</button>
-            </div>
-            </div>`;
-            myTask = "";
-        
-    
-        })
-        .catch(function(err){
+            displayTaskingsFromJson();
+        })    
+        .catch(function(err)
+        {
             console.log(err);
-        });
+        });    
    
-    }
-    // myTask = "";
-    // window.location.reload();
+    }    
     
+}    
+
+function supprimerTache(id) {
+
+    if (confirm("Voulez-vous suppimer cette tâche ?")){
+
+        fetch(listTasks+id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+        }).then(function(response) {
+            console.log(response);
+            displayTaskingsFromJson();
+        });
+    }
+
 }
 
-function taskDone(id){
-    
-    //===============  VERSION WEB DE "TERMINEE" : ============================
 
-    fetch(`http://localhost:9090/api/taches/${id}/terminer`, {
-        // mode: 'no-cors',
-        method: 'PUT',  
+function modifierTache(tacheDescr, tacheID) {
+
+    let tacheEdit = prompt(`Modifier votre tâche : ${tacheDescr}`);
+
+    let textetache = {
+        description: tacheEdit
+    }
+    fetch(listTasks+tacheID, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-          },
-    }).then(function(response)
-    {
+        },
+        body: JSON.stringify(textetache)
+    }).then(function(response) {
         console.log(response);
-    })
-    window.location.reload();
-
-
-
-    // const myDataObject = { id: `${id}`, terminee: true};
-
-    // fetch(`http://localhost:9090/api/taches`, {
-    //     method: 'PUT',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(myDataObject)
-    // })
-    // .then(response => {
-    //     return response.json( )
-    // })
-    // .then(data => 
-    //     // this is the data we get after putting our data, do whatever you want with this data
-    //     console.log(data) 
-    // );
-
-
-    //===============  NOTRE VERSION "TERMINEE" : ============================
-    
-    // fetch(`http://localhost:9090/api/taches/${id}/${terminee}`, {
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //       },
-    //       method: "PUT",
-    //       // cette partie body, permet d'ajouter dans le Json la nouvelle tâche
-    //       // sous forme d'une chaine de caractère à la clef 'description'
-    //       body: JSON.stringify(newTask)
-    // })
-    // .then
-    // (
-    //     function(response)
-    //     {
-    //         return response.json();
-    //     }
-    // )
-    // .then
-    // (
-    //     function(response)
-    //     {
-    //         for (elem of response)
-    //         {
-    //             if (elem.id == id)
-    //             {
-    //                 elem.terminee == true;
-    //             }
-    //         }
-    //     }
-    // )
-    // .catch
-    // (
-    //     function(err)
-    //     {
-    //         console.log(err);
-    //     }
-    // );
-
-  
-}
-
-function delTask(id) {
-
-    console.log(id);
-    fetch(`http://localhost:9090/api/taches/${id}`, {
-        method: 'DELETE',  
+        displayTaskingsFromJson();
     });
-    window.location.reload();
-
 }
 
 
-
-// function taskDone(myTask) {
-
-//     console.log(myTask);
-//     let taskName = document.getElementById('taskname').innerText;
-//     console.log(taskName);
-
-//     // let areaComptTask = document.getElementById('completed');
-//     // let areaPendingTask = document.getElementById('pending');
-
+function tacheTermine(id){
     
+   
+    let newTask = {
+        id: `${id}`    
+    }
+    fetch(listTasks+id+"/terminer",{
+        method: 'PUT',      
+        headers: {
+            'Content-Type': 'application/json',    
+          },
+        body: JSON.stringify(newTask)
+    }).then(function(response)
+    {   
+        console.log(response);
+        displayTaskingsFromJson();
 
-//     // areaComptTask.innerHTML += `<div class="task">
-//     // <span id="taskname">${taskName}</span> 
+    })
 
-//     // <div class="areabuttons">
-
-//     //     <button id="cpt-button-del">Delete</button>
-
-//     // </div>
-//     // </div>`;
-
-// }
-
-// function taskDone(id) {
-//     let areaTaskCompleted = document.getElementById("completed");
-//     // let taskName = document.getElementById('taskname').innerText;
-//     // console.log(taskName);
-//     // console.log(task.parentElement.parentElement.children[0].innerText);
-//     console.log(id);
-//     // console.log(taskcomp);
-
-//     fetch(listTasks)
-//         .then(function(html){
-//             return html.json();
-//         })
-//         .then(function(html){
-//             // alert(html);
-//             // console.log(html);
-            
-//             for(task of html){
-//                 messageNoTask.innerHTML = "";
-//                 if (id == task.id){
-//                     console.log("description:",task.description);
-
-//                     areaTaskCompleted.innerHTML += `<div class="task">
-//                     <span id="taskname">${task.description}</span> 
-                
-//                     <div class="areabuttons">
-                       
-//                     <button onclick="delTask(${task.id})"id="cpt-button-del">Delete</button>
-                        
-//                     </div>
-//                     </div>`;
-//                 }
-//                 // console.log(task.description);
-//             }
-
-//         })
-//         .catch(function(err){
-//             console.log(err);
-//         });
-// }
-
-
-// function addTask() {
-
-//     // on récupère la valeur de l'input, donc la chaine de caractères que l'on saisi: la tâche à ajouter
-//     const myTask = document.getElementById('task').value;
-//     // console.log(myTask);
-//     if (myTask === "") {
-//         console.log("vous n'avez rien saisi");
-//     } 
-//     else {
-//         // on retire le message 
-//         messageNoTask.innerHTML = "";
-
-//         // on récupère la zone des tâches en cours
-//         const areaTask = document.getElementById('pending');
-    
-//         // on y ajoute la tâche qu'on a saisi avec ces éléments
-//         areaTask.innerHTML += `<div class="task">
-//         <span id="taskname">${myTask}</span> 
-    
-//         <div class="areabuttons">
-//             <button onclick="taskDone(this)" id="cpt-button-done">Done</button>
-//             <button id="cpt-button-del">Delete</button>
-//             <button id="cpt-button-edit">Edit</button>
-//         </div>
-//         </div>`;
-
-//         // let madiv = document.createElement('div');
-//         // madiv.setAttribute('id', this.id);
-//         // madiv.setAttribute('class', 'task');
-     
-//         // et on clear le champs de saisi 
-//         document.getElementById('task').value = "";
-//     }
-    
-// }
-
-
+}

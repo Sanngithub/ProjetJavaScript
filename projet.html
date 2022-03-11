@@ -18,14 +18,17 @@
 
             <div id="newtask">
                 <input value="" id="task" type="text" placeholder="add task">
-                <button id="push" methode="POST" onclick="addTask()">Add</button>
+                <button id="push" onclick="ajouterTache()">Add</button>
             </div>
 
-    
+            <div id="blocTitreMessage">
+                <h2 id="title2">Pending :</h2>
+                <span id="messageDansTacheEnCours">you have no current tasks</span>
+            </div>
+
             <div id="pending">
-
-                <h2 id="title2">En cours:</h2>
-
+            
+            
                 <!-- <div class="task">
                     <span id="taskname">Terminer le projet JavaScript</span> 
 
@@ -36,14 +39,17 @@
                     </div>
                     
                 </div> -->
-      
+                
                 
             </div>
             
+            <div id="blocTitreMessage">
+                <h2 id="title2">Completed :</h2>
+                <span id="messageDansTacheTerminee">you have no completed tasks</span>
 
+            </div>
             <div id="completed">
-
-                <h2 id="title2">Terminée(s) :</h2>
+                
                 <!-- <div class="task">
                     <span id="taskname">Réussir mon année DUT compl</span> 
                     <div class="areabuttons">
