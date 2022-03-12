@@ -1,12 +1,7 @@
 const listTasks = 'http://localhost:9090/api/taches/';
 
-let estModifie = false;
 
-// par défaut, la méthode utilisé si on ne le mentionne pas, est 'GET' pour le fetch
-// on appelle la fonction à chaque fois qu'on refresh la page
-// ce qui nous permet d'afficher les tâches au fur et à mesure
-// cela nous évite de répeter la création du bloc
-
+// Fonction principale qui affiche toute les tâches
 function displayTaskingsFromJson() {
     document.getElementById('task').value = "";
     fetch(listTasks)
@@ -28,11 +23,10 @@ function displayTaskingsFromJson() {
             
             if (task.terminee == false) 
             {
-                // messageNoTask.innerHTML = "";
                 const areaTask = document.getElementById('pending');
                 areaTask.innerHTML += 
                 `<div class="task" id="zoneTache">
-                    <span class="classTask" id="taskname">${task.description}</span> 
+                    <span class="classTask" id="taskname">► ${task.description}</span> 
             
                     <div class="areabuttons">
                         <button onclick="tacheTermine(${task.id})" id="cpt-button-done">Done</button>
@@ -45,10 +39,9 @@ function displayTaskingsFromJson() {
             else
             {
             
-                // messageNoTaskComp.innerHTML = "";
                 const areaTask = document.getElementById('completed');
                 areaTask.innerHTML += `<div class="task" id="zoneTache">
-                <span class="classTask" id="taskname">${task.description}</span> 
+                <span class="classTaskCompt" id="taskname">${task.description}</span> 
             
                 <div class="areabuttons">
                     <button onclick="supprimerTache(${task.id})"id="cpt-button-del">Delete</button>
@@ -58,20 +51,21 @@ function displayTaskingsFromJson() {
             }
         }
 
-        if (nbreTacheEnCours>0){
+        if (nbreTacheEnCours>0)
+        {
             document.getElementById("messageDansTacheEnCours").style.display = 'none';
-        } else{
+        } else
+        {
             document.getElementById("messageDansTacheEnCours").style.display = 'block';
         }
 
-        if(nbreTacheTerminee>0){
+        if(nbreTacheTerminee>0)
+        {
             document.getElementById("messageDansTacheTerminee").style.display = 'none';
-        } else {
+        } else 
+        {
             document.getElementById("messageDansTacheTerminee").style.display = 'block';
         }
-
-      
-    
         })
         .catch(function(err){
             console.log(err);
@@ -79,13 +73,17 @@ function displayTaskingsFromJson() {
    
 }
 
+
 displayTaskingsFromJson();
 
 
 
+
+
+// Fonction pour ajouter une tâche à la section 'En cours'
+// saisi d'une nouvelle tâche
 function ajouterTache() 
 {
-
     let myTask = document.getElementById('task').value;
     if (myTask === "") 
     {
@@ -126,16 +124,22 @@ function ajouterTache()
     
 }    
 
+
+// Fonction pour supprimer une tâche 
+// avec un message de confirmation
 function supprimerTache(id) {
 
-    if (confirm("Voulez-vous suppimer cette tâche ?")){
-
-        fetch(listTasks+id, {
+    if (confirm("Voulez-vous suppimer cette tâche ?"))
+    {
+        fetch(listTasks+id, 
+        {
             method: 'DELETE',
-            headers: {
+            headers: 
+            {
                 'Content-Type': 'application/json',
-              },
-        }).then(function(response) {
+            },
+        }).then(function(response) 
+        {
             console.log(response);
             displayTaskingsFromJson();
         });
@@ -144,33 +148,41 @@ function supprimerTache(id) {
 }
 
 
-function modifierTache(tacheDescr, tacheID) {
-
+// fonction qui modifie la tâche à l'aide un prompt
+function modifierTache(tacheDescr, tacheID) 
+{
     let tacheEdit = prompt(`Modifier votre tâche : ${tacheDescr}`);
 
-    let textetache = {
+    let textetache = 
+    {
         description: tacheEdit
     }
-    fetch(listTasks+tacheID, {
+    fetch(listTasks+tacheID, 
+        {
         method: 'PUT',
-        headers: {
+        headers: 
+        {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(textetache)
-    }).then(function(response) {
+    }).then(function(response) 
+    {
         console.log(response);
         displayTaskingsFromJson();
     });
 }
 
 
-function tacheTermine(id){
-    
-   
-    let newTask = {
+// Fonction pour ajouter une tâche à la section 'Terminé'
+// tâche terminée...
+function tacheTermine(id)
+{
+    let newTask = 
+    {
         id: `${id}`    
     }
-    fetch(listTasks+id+"/terminer",{
+    fetch(listTasks+id+"/terminer",
+    {
         method: 'PUT',      
         headers: {
             'Content-Type': 'application/json',    
@@ -182,5 +194,4 @@ function tacheTermine(id){
         displayTaskingsFromJson();
 
     })
-
 }

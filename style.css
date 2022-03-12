@@ -1,10 +1,8 @@
-
 *{
     padding:0;
     margin:0;
     box-sizing: border-box;
     font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-
 }
 
 
@@ -21,22 +19,17 @@ body {
     background-color: #fff;
 }
 
+/* Titre principal */
 #title{
   
     text-align: center;
-    /* padding: 20px; */
     font-size: 20px;
     color: black;
-    /* background: linear-gradient(
-        to right, 
-        rgb(241, 241, 240), 
-        rgb(190, 190, 190)
-      ); */
-
     border-radius: 8px;
     /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
 }
 
+/* Titre 'pending' et 'completed' */
 #title2{
     text-align: left;
     padding: 30px 0px 0px 0px;
@@ -46,7 +39,7 @@ body {
     
 }
 
-
+/* saisie de la nouvelle tache */
 #newtask {
     margin-top: 10px;
     position: relative;
@@ -72,7 +65,8 @@ body {
     border-color: #1c7ab1;
 }
 
-/*Bouton Add*/
+
+/*Bouton Add */
 #newtask #push{
     position: relative;
     width: 60px;
@@ -87,13 +81,13 @@ body {
     cursor: pointer;
 }
 
-
 #newtask #push:hover{
     color: #1c7ab1;
     border: #1c7ab1 solid 2px;
     background:#fff;
     
 }
+
 
 #pending{
     width: 100%;
@@ -102,9 +96,13 @@ body {
     background: #fff;
     padding:20px 10px;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
 
 
+
+
+/* div 'task' qui regroupe le bloc d'élément qu'on ajoute dans le html */
 .task{
     display: flex;
     background: #fff;
@@ -128,23 +126,7 @@ body {
 .task span{
     font-size: 13px;
     font-weight: 400;
-    cursor: pointer;
-    /* background-color: black; */
 }
-
-/* .task #cpt-button{
-    position: relative;
-    width: 50px;
-    height: 30px;
-    border-radius: 3px;
-    font-weight: 500;
-    font-size: 15px;
-    background: #a8b0b3;
-    color: #fff;
-    border: none;
-    outline: none;
-    cursor: pointer; 
-} */
 
 .task .areabuttons button{
     position: relative;
@@ -186,6 +168,11 @@ body {
 
 }
 
+.classTaskCompt{
+
+    text-decoration: line-through;
+
+}
 
 #completed{
     width: 100%;
