@@ -1,5 +1,5 @@
 const listTasks = 'http://localhost:9090/api/taches/';
-
+// SCRIPT POUR PROJET JS
 
 // Fonction principale qui affiche toute les tâches
 function displayTaskingsFromJson() {
