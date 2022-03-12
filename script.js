@@ -1,5 +1,6 @@
-const listTasks = 'http://localhost:9090/api/taches/';
 // SCRIPT POUR PROJET JS
+// GERBER KEVIN - BERNARD NGUYEN AS 2021-2022
+const listTasks = 'http://localhost:9090/api/taches/';
 
 // Fonction principale qui affiche toute les tâches
 function displayTaskingsFromJson() {
