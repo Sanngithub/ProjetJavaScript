@@ -19,12 +19,12 @@
 
             <div id="newtask">
                 <input value="" id="task" type="text" placeholder="add task">
-                <button id="push" onclick="ajouterTache()">Add</button>
+                <button id="push" onclick="addTask()">Add</button>
             </div>
 
             <div id="blocTitreMessage">
                 <h2 id="title2">Pending :</h2>
-                <span id="messageDansTacheEnCours">you have no current tasks</span>
+                <span id="messageDansTacheEnCours">you have no current task</span>
             </div>
 
             <div id="pending">
@@ -34,9 +34,9 @@
                     <span class="classTask" id="taskname">► ${task.description}</span> 
             
                     <div class="areabuttons">
-                        <button onclick="tacheTermine(${task.id})" id="cpt-button-done">Done</button>
-                        <button onclick="supprimerTache(${task.id})" id="cpt-button-del">Delete</button>
-                        <button onclick="modifierTache('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
+                        <button onclick="taskFinished(${task.id})" id="cpt-button-done">Done</button>
+                        <button onclick="deleteTask(${task.id})" id="cpt-button-del">Delete</button>
+                        <button onclick="editTask('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
                     </div>
                 </div>-->
                 
@@ -54,7 +54,7 @@
                     <span class="classTask" id="taskname">► ${task.description}</span> 
             
                     <div class="areabuttons">
-                        <button onclick="supprimerTache(${task.id})" id="cpt-button-del">Delete</button>
+                        <button onclick="deleteTask(${task.id})" id="cpt-button-del">Delete</button>
                     </div>
                 </div>-->
         
@@ -67,7 +67,7 @@
 
         <!-- <div class="task">
             <span id="taskname">${document.querySelector('task').value}</span>
-            <button clsss="delete">Supprimer</button>
+            <button class="delete">Supprimer</button>
         </div> -->
 </body>
 </html>

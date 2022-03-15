@@ -1,8 +1,13 @@
-// SCRIPT POUR PROJET JS
-// GERBER KEVIN - BERNARD NGUYEN AS 2021-2022
+// ========================================================= //
+//                 SCRIPT POUR PROJET JS                     //
+//         GERBER KEVIN - BERNARD NGUYEN AS 2021-2022        //
+// ========================================================= //
+
+
+//  Fonction principale qui affiche toute les tâches
+
 const listTasks = 'http://localhost:9090/api/taches/';
 
-// Fonction principale qui affiche toute les tâches
 function displayTaskingsFromJson() {
     document.getElementById('task').value = "";
     fetch(listTasks)
@@ -10,14 +15,13 @@ function displayTaskingsFromJson() {
         return response.json();
     })
     .then(function(html){
-        // alert(html);
         console.log("voici mon HTML ",html);
         console.log("taille de mon HTML ",html.length);
         document.getElementById("pending").innerHTML = "";
         document.getElementById("completed").innerHTML = "";
         
-        let nbreTacheEnCours= 0;
-        let nbreTacheTerminee= 0;
+        let nbOfPendingTasks= 0;
+        let nbOfFinishedTasks= 0;
     
         for(task of html){
 
@@ -30,12 +34,12 @@ function displayTaskingsFromJson() {
                     <span class="classTask" id="taskname">► ${task.description}</span> 
             
                     <div class="areabuttons">
-                        <button onclick="tacheTermine(${task.id})" id="cpt-button-done">Done</button>
-                        <button onclick="supprimerTache(${task.id})" id="cpt-button-del">Delete</button>
-                        <button onclick="modifierTache('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
+                        <button onclick="taskFinished(${task.id})" id="cpt-button-done">Done</button>
+                        <button onclick="deleteTask(${task.id})" id="cpt-button-del">Delete</button>
+                        <button onclick="editTask('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
                     </div>
                 </div>`;
-                nbreTacheEnCours += 1;
+                nbOfPendingTasks += 1;
             } 
             else
             {
@@ -45,14 +49,14 @@ function displayTaskingsFromJson() {
                 <span class="classTaskCompt" id="taskname">${task.description}</span> 
             
                 <div class="areabuttons">
-                    <button onclick="supprimerTache(${task.id})"id="cpt-button-del">Delete</button>
+                    <button onclick="deleteTask(${task.id})"id="cpt-button-del">Delete</button>
                 </div>
                 </div>`;
-                nbreTacheTerminee += 1;
+                nbOfFinishedTasks += 1;
             }
         }
 
-        if (nbreTacheEnCours>0)
+        if (nbOfPendingTasks>0)
         {
             document.getElementById("messageDansTacheEnCours").style.display = 'none';
         } else
@@ -60,7 +64,7 @@ function displayTaskingsFromJson() {
             document.getElementById("messageDansTacheEnCours").style.display = 'block';
         }
 
-        if(nbreTacheTerminee>0)
+        if(nbOfFinishedTasks>0)
         {
             document.getElementById("messageDansTacheTerminee").style.display = 'none';
         } else 
@@ -78,12 +82,10 @@ function displayTaskingsFromJson() {
 displayTaskingsFromJson();
 
 
-
-
-
 // Fonction pour ajouter une tâche à la section 'En cours'
 // saisi d'une nouvelle tâche
-function ajouterTache() 
+
+function addTask() 
 {
     let myTask = document.getElementById('task').value;
     if (myTask === "") 
@@ -128,9 +130,9 @@ function ajouterTache()
 
 // Fonction pour supprimer une tâche 
 // avec un message de confirmation
-function supprimerTache(id) {
+function deleteTask(id) {
 
-    if (confirm("Voulez-vous suppimer cette tâche ?"))
+    if (confirm("Are you sure you want to delete this task ?"))
     {
         fetch(listTasks+id, 
         {
@@ -150,9 +152,9 @@ function supprimerTache(id) {
 
 
 // fonction qui modifie la tâche à l'aide un prompt
-function modifierTache(tacheDescr, tacheID) 
+function editTask(tacheDescr, tacheID) 
 {
-    let tacheEdit = prompt(`Modifier votre tâche : ${tacheDescr}`);
+    let tacheEdit = prompt(`Modify the task : ${tacheDescr}`);
 
     let textetache = 
     {
@@ -176,7 +178,8 @@ function modifierTache(tacheDescr, tacheID)
 
 // Fonction pour ajouter une tâche à la section 'Terminé'
 // tâche terminée...
-function tacheTermine(id)
+
+function taskFinished(id)
 {
     let newTask = 
     {
