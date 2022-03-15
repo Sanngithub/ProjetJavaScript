@@ -44,7 +44,6 @@ function displayTaskingsFromJson() {
             } 
             else
             {
-            
                 const areaTask = document.getElementById('completed');
                 areaTask.innerHTML += `<div class="task" id="zoneTache">
                 <span class="classTaskCompt" id="taskname">${task.description}</span> 
@@ -60,9 +59,11 @@ function displayTaskingsFromJson() {
         if (nbOfPendingTasks>0)
         {
             document.getElementById("messageInPendingTask").style.display = 'none';
+            document.getElementById("pending").style.display = 'none';
         } else
         {
             document.getElementById("messageInPendingTask").style.display = 'block';
+            document.getElementById("pending").style.display = 'block';
         }
 
         if (nbOfFinishedTasks>0)
@@ -97,7 +98,6 @@ function addTask()
         let newTask = {
             description: myTask,
         };
-  
         fetch(listTasks,
         {
             headers: {
@@ -121,8 +121,7 @@ function addTask()
             console.log(err);
         });
     }    
-    
-}    
+};
 
 // Fonction pour supprimer une tâche (avec un message de confirmation)
 
@@ -143,7 +142,7 @@ function deleteTask(id)
             displayTaskingsFromJson();
         });
     }
-}
+};
 
 // fonction qui modifie la tâche à l'aide un prompt
 
@@ -154,7 +153,8 @@ function editTask(tacheDescr, tacheID)
     let textetache = 
     {
         description: tacheEdit
-    }
+    };
+
     fetch(listTasks+tacheID, 
         {
         method: 'PUT',
@@ -168,7 +168,7 @@ function editTask(tacheDescr, tacheID)
         console.log(response);
         displayTaskingsFromJson();
     });
-}
+};
 
 // Fonction pour ajouter une tâche à la section 'Terminé'
 // tâche terminée...
@@ -190,6 +190,5 @@ function taskFinished(id)
     {   
         console.log(response);
         displayTaskingsFromJson();
-
     })
-}
+};

@@ -14,9 +14,10 @@
 
 <body>
     <div id="title">
+
         <h1>My ToDo List</h1>
+
     </div>
-    
         <div class="container">
 
             <div id="newtask">
@@ -26,14 +27,12 @@
 
             <div id="messageTitleBlock">
                 <h2 id="title2">Pending :</h2>
-                <span id="messageInPendingTask">you have no current task</span>
+                <span id="messageInPendingTask"><br/>You have no current task<br/></span>
             </div>
 
             <div id="pending">
-            
-            
                 <!--<div class="task" id="taskZone">
-                    <span class="classTask" id="taskname">► ${task.description}</span> 
+                    <span class="classTask" id="taskname"> ► ${task.description}</span> 
             
                     <div class="areabuttons">
                         <button onclick="taskFinished(${task.id})" id="cpt-button-done">Done</button>
@@ -41,28 +40,22 @@
                         <button onclick="editTask('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
                     </div>
                 </div>-->
-                
-                
             </div>
             
             <div id="messageTitleBlock">
                 <h2 id="title2">Completed :</h2>
                 <span id="messageInDoneTask">you have no completed tasks</span>
-
             </div>
+
             <div id="completed">
-                
                 <!--<div class="task" id="taskZone">
-                    <span class="classTask" id="taskname">► ${task.description}</span> 
+                    <span class="classTask" id="taskname"> ► ${task.description}</span> 
             
                     <div class="areabuttons">
                         <button onclick="deleteTask(${task.id})" id="cpt-button-del">Delete</button>
                     </div>
-                </div>-->
-        
+                </div>-->        
             </div>
-       
-
         </div>
 
         <script type="text/javascript" src="script.js"></script>
@@ -71,5 +64,6 @@
             <span id="taskname">${document.querySelector('task').value}</span>
             <button class="delete">Supprimer</button>
         </div> -->
+
 </body>
 </html>
