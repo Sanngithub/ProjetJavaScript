@@ -1,5 +1,5 @@
 // ========================================================= //
-//                 SCRIPT POUR PROJET JS                     //
+//                 SCRIPT DU PROJET JavaScript               //
 //         GERBER KEVIN - BERNARD NGUYEN AS 2021-2022        //
 // ========================================================= //
 
@@ -86,7 +86,7 @@ function displayTaskingsFromJson() {
 displayTaskingsFromJson();
 
 // Fonction pour ajouter une tâche à la section 'Pending'
-// saisie d'une nouvelle tâche
+// Saisie d'une nouvelle tâche
 
 function addTask() 
 {
@@ -173,7 +173,7 @@ function editTask(tacheDescr, tacheID)
 };
 
 // Fonction pour ajouter une tâche à la section 'Completed'
-// tâche terminée...
+// tâche terminée
 
 function taskCompleted(id)
 {
