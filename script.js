@@ -11,21 +11,22 @@ const listTasks = 'http://localhost:9090/api/taches/';
 function displayTaskingsFromJson() {
     document.getElementById('task').value = "";
     fetch(listTasks)
-    .then(function(response){
+    .then(function(response)
+    {
         return response.json();
     })
-    .then(function(html){
-        console.log("voici mon HTML ",html);
-        console.log("taille de mon HTML ",html.length);
+    .then(function(html)
+    {
+        console.log("there is my HTML page",html);
+        console.log("HTML size",html.length);
         document.getElementById("pending").innerHTML = "";
         document.getElementById("completed").innerHTML = "";
         
-        let nbOfPendingTasks= 0;
-        let nbOfFinishedTasks= 0;
+        let nbOfPendingTasks = 0;
+        let nbOfFinishedTasks = 0;
     
-        for(task of html){
-
-            
+        for(task of html)
+        {
             if (task.terminee == false) 
             {
                 const areaTask = document.getElementById('pending');
@@ -58,29 +59,28 @@ function displayTaskingsFromJson() {
 
         if (nbOfPendingTasks>0)
         {
-            document.getElementById("messageDansTacheEnCours").style.display = 'none';
+            document.getElementById("messageInPendingTask").style.display = 'none';
         } else
         {
-            document.getElementById("messageDansTacheEnCours").style.display = 'block';
+            document.getElementById("messageInPendingTask").style.display = 'block';
         }
 
-        if(nbOfFinishedTasks>0)
+        if (nbOfFinishedTasks>0)
         {
-            document.getElementById("messageDansTacheTerminee").style.display = 'none';
+            document.getElementById("messageInDoneTask").style.display = 'none';
         } else 
         {
-            document.getElementById("messageDansTacheTerminee").style.display = 'block';
+            document.getElementById("messageInDoneTask").style.display = 'block';
         }
         })
-        .catch(function(err){
+        .catch(function(err)
+        {
             console.log(err);
         });
    
 }
 
-
 displayTaskingsFromJson();
-
 
 // Fonction pour ajouter une tâche à la section 'En cours'
 // saisi d'une nouvelle tâche
@@ -90,11 +90,10 @@ function addTask()
     let myTask = document.getElementById('task').value;
     if (myTask === "") 
     {
-        alert("vous na'avez pas saisi de tâche !")
+        alert("Task is empty !")
     }
     else
     {
-
         let newTask = {
             description: myTask,
         };
@@ -107,7 +106,6 @@ function addTask()
             },
             method: "POST",
             body: JSON.stringify(newTask)
-
         })
         .then(function(html)
         {
@@ -121,17 +119,15 @@ function addTask()
         .catch(function(err)
         {
             console.log(err);
-        });    
-   
+        });
     }    
     
 }    
 
+// Fonction pour supprimer une tâche (avec un message de confirmation)
 
-// Fonction pour supprimer une tâche 
-// avec un message de confirmation
-function deleteTask(id) {
-
+function deleteTask(id)
+{
     if (confirm("Are you sure you want to delete this task ?"))
     {
         fetch(listTasks+id, 
@@ -147,11 +143,10 @@ function deleteTask(id) {
             displayTaskingsFromJson();
         });
     }
-
 }
 
-
 // fonction qui modifie la tâche à l'aide un prompt
+
 function editTask(tacheDescr, tacheID) 
 {
     let tacheEdit = prompt(`Modify the task : ${tacheDescr}`);
@@ -174,7 +169,6 @@ function editTask(tacheDescr, tacheID)
         displayTaskingsFromJson();
     });
 }
-
 
 // Fonction pour ajouter une tâche à la section 'Terminé'
 // tâche terminée...

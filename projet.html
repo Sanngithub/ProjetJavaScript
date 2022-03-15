@@ -7,9 +7,11 @@
     <title>My To Do List</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <!--PROJET JS TERMINEE-->
 <!--BRANCHEUNE GITHUB TERMINEE-->
 <!-- modif kevin branche 2 -->
+
 <body>
     <div id="title">
         <h1>My ToDo List</h1>
@@ -18,19 +20,19 @@
         <div class="container">
 
             <div id="newtask">
-                <input value="" id="task" type="text" placeholder="add task">
-                <button id="push" onclick="addTask()">Add</button>
+                <input value="" id="task" type="text" placeholder="add task" onKeyPress="if(event.keyCode == 13) addTask();">
+                <button type="submit" id="push" onclick="addTask()">Add</button>
             </div>
 
-            <div id="blocTitreMessage">
+            <div id="messageTitleBlock">
                 <h2 id="title2">Pending :</h2>
-                <span id="messageDansTacheEnCours">you have no current task</span>
+                <span id="messageInPendingTask">you have no current task</span>
             </div>
 
             <div id="pending">
             
             
-                <!--<div class="task" id="zoneTache">
+                <!--<div class="task" id="taskZone">
                     <span class="classTask" id="taskname">► ${task.description}</span> 
             
                     <div class="areabuttons">
@@ -43,14 +45,14 @@
                 
             </div>
             
-            <div id="blocTitreMessage">
+            <div id="messageTitleBlock">
                 <h2 id="title2">Completed :</h2>
-                <span id="messageDansTacheTerminee">you have no completed tasks</span>
+                <span id="messageInDoneTask">you have no completed tasks</span>
 
             </div>
             <div id="completed">
                 
-                <!--<div class="task" id="zoneTache">
+                <!--<div class="task" id="taskZone">
                     <span class="classTask" id="taskname">► ${task.description}</span> 
             
                     <div class="areabuttons">
