@@ -75,7 +75,7 @@ function displayTaskingsFromJson() {
             document.getElementById("messageInDoneTask").style.display = 'block';
             document.getElementById("completed").style.display = 'none';
         }
-        })
+    })
         .catch(function(err)
         {
             console.log(err);

@@ -28,3 +28,5 @@ messageTitleBlock
 
 zoneTache
 taskZone
+
+onKeyPress="if(event.keyCode == 46) && onmouseover delete() onKeyPress="if(event.keyCode == 13) && onmouseover taskFinished()
