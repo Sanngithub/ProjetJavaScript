@@ -27,7 +27,7 @@
 
             <div id="messageTitleBlock">
                 <h2 id="title2">Pending :</h2>
-                <span id="messageInPendingTask"><br/>You have no current task<br/></span>
+                <span id="messageInPendingTask"><br/>You have no current task.<br/></span>
             </div>
 
             <div id="pending">
@@ -35,7 +35,7 @@
                     <span class="classTask" id="taskname"> ► ${task.description}</span> 
             
                     <div class="areabuttons">
-                        <button onclick="taskFinished(${task.id})" id="cpt-button-done">Done</button>
+                        <button onclick="taskCompleted(${task.id})" id="cpt-button-done">Done</button>
                         <button onclick="deleteTask(${task.id})" id="cpt-button-del">Delete</button>
                         <button onclick="editTask('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
                     </div>
@@ -44,12 +44,12 @@
             
             <div id="messageTitleBlock">
                 <h2 id="title2">Completed :</h2>
-                <span id="messageInDoneTask">you have no completed tasks</span>
+                <span id="messageInDoneTask"><br/>You have no completed tasks.<br/></span>
             </div>
 
             <div id="completed">
                 <!--<div class="task" id="taskZone">
-                    <span class="classTask" id="taskname"> ► ${task.description}</span> 
+                    <span class="classTask" id="taskname"> √ ${task.description}</span> 
             
                     <div class="areabuttons">
                         <button onclick="deleteTask(${task.id})" id="cpt-button-del">Delete</button>

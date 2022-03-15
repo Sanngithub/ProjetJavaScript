@@ -31,11 +31,11 @@ function displayTaskingsFromJson() {
             {
                 const areaTask = document.getElementById('pending');
                 areaTask.innerHTML += 
-                `<div class="task" id="zoneTache">
-                    <span class="classTask" id="taskname">► ${task.description}</span> 
+                `<div class="task" id="zoneTache" (onmouseover() && onkeypress) = "if(event.keyCode == 13) delete()">
+                    <span class="classTask" id="taskname"> ► ${task.description}</span> 
             
                     <div class="areabuttons">
-                        <button onclick="taskFinished(${task.id})" id="cpt-button-done">Done</button>
+                        <button onclick="taskCompleted(${task.id})" id="cpt-button-done">Done</button>
                         <button onclick="deleteTask(${task.id})" id="cpt-button-del">Delete</button>
                         <button onclick="editTask('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
                     </div>
@@ -55,23 +55,25 @@ function displayTaskingsFromJson() {
                 nbOfFinishedTasks += 1;
             }
         }
-
+        
         if (nbOfPendingTasks>0)
         {
             document.getElementById("messageInPendingTask").style.display = 'none';
-            document.getElementById("pending").style.display = 'none';
+            document.getElementById("pending").style.display = 'block';
         } else
         {
             document.getElementById("messageInPendingTask").style.display = 'block';
-            document.getElementById("pending").style.display = 'block';
+            document.getElementById("pending").style.display = 'none';
         }
-
+        
         if (nbOfFinishedTasks>0)
         {
             document.getElementById("messageInDoneTask").style.display = 'none';
+            document.getElementById("completed").style.display = 'block';
         } else 
         {
             document.getElementById("messageInDoneTask").style.display = 'block';
+            document.getElementById("completed").style.display = 'none';
         }
         })
         .catch(function(err)
@@ -83,8 +85,8 @@ function displayTaskingsFromJson() {
 
 displayTaskingsFromJson();
 
-// Fonction pour ajouter une tâche à la section 'En cours'
-// saisi d'une nouvelle tâche
+// Fonction pour ajouter une tâche à la section 'Pending'
+// saisie d'une nouvelle tâche
 
 function addTask() 
 {
@@ -144,7 +146,7 @@ function deleteTask(id)
     }
 };
 
-// fonction qui modifie la tâche à l'aide un prompt
+// fonction qui modifie la tâche à l'aide de la méthode prompt
 
 function editTask(tacheDescr, tacheID) 
 {
@@ -170,10 +172,10 @@ function editTask(tacheDescr, tacheID)
     });
 };
 
-// Fonction pour ajouter une tâche à la section 'Terminé'
+// Fonction pour ajouter une tâche à la section 'Completed'
 // tâche terminée...
 
-function taskFinished(id)
+function taskCompleted(id)
 {
     let newTask = 
     {
