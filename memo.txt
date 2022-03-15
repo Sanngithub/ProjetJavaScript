@@ -1,0 +1,30 @@
+function tacheTermine(id)
+function taskFinished(id)
+
+
+nbreTacheTerminee
+nbOfFinishedTasks
+
+nbreTacheEnCours
+nbOfPendingTasks
+
+modifierTache
+editTask
+
+supprimerTache
+deleteTask
+
+ajouterTache
+addTask
+
+messageDansTacheEnCours
+messageInPendingTask
+
+messageDansTacheTerminee
+messageInDoneTask
+
+blocTitreMessage
+messageTitleBlock
+
+zoneTache
+taskZone
