@@ -21,7 +21,6 @@ function displayTaskingsFromJson() {
     
         for(task of html){
 
-            
             if (task.terminee == false) 
             {
                 const areaTask = document.getElementById('pending');
@@ -30,9 +29,9 @@ function displayTaskingsFromJson() {
                     <span class="classTask" id="taskname">► ${task.description}</span> 
             
                     <div class="areabuttons">
-                        <button onclick="tacheTermine(${task.id})" id="cpt-button-done">Done</button>
-                        <button onclick="supprimerTache(${task.id})" id="cpt-button-del">Delete</button>
-                        <button onclick="modifierTache('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
+                        <button onclick="tacheTermine(${task.id})" id="cpt-button-done">Terminee</button>
+                        <button onclick="supprimerTache(${task.id})" id="cpt-button-del">Supprimer</button>
+                        <button onclick="modifierTache('${task.description}', '${task.id}')" id="cpt-button-edit">Modifier</button>
                     </div>
                 </div>`;
                 nbreTacheEnCours += 1;
@@ -45,7 +44,7 @@ function displayTaskingsFromJson() {
                 <span class="classTaskCompt" id="taskname">${task.description}</span> 
             
                 <div class="areabuttons">
-                    <button onclick="supprimerTache(${task.id})"id="cpt-button-del">Delete</button>
+                    <button onclick="supprimerTache(${task.id})"id="cpt-button-del">Supprimer</button>
                 </div>
                 </div>`;
                 nbreTacheTerminee += 1;
