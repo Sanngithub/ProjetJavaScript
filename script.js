@@ -90,13 +90,11 @@ displayTaskingsFromJson();
 
 function addTask() 
 {
-    // const regexForTask = /[A-Za-z0-9' ,:;?!_]*/;
-    // const regexForTask = /^[ a-zA-Z0-9]{2,10}$/;
-    const regexForTask = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{2,60}$/;
-   
-   
 
+    const regexForTask = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{2,60}$/;
     let myTask = document.getElementById('task').value;
+
+    
     if (myTask === "") 
     {
         alert("Task is empty !");
