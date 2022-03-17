@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,22 +22,23 @@
     <div class="container">
 
         <div id="newtask">
-            <input value="" id="task" type="text" placeholder="add task" onKeyPress="if(event.keyCode == 13) addTask();">
+            <input value="" id="task" type="text" placeholder="add task"
+                onKeyPress="if(event.keyCode == 13) addTask();">
             <button type="submit" id="push" onclick="addTask()">Add</button>
         </div>
 
         <div id="messageTitleBlock">
             <h2 id="title2">Pending :</h2>
-            <span id="messageInPendingTask"><br/>You have no current task.<br/></span>
+            <span id="messageInPendingTask"><br />You have no current task.<br /></span>
         </div>
 
         <div id="pending">
 
         </div>
-        
+
         <div id="messageTitleBlock">
             <h2 id="title2">Completed :</h2>
-            <span id="messageInDoneTask"><br/>You have no completed tasks.<br/></span>
+            <span id="messageInDoneTask"><br />You have no completed tasks.<br /></span>
         </div>
 
         <div id="completed">
@@ -53,4 +55,5 @@
     <script type="text/javascript" src="script.js"></script>
 
 </body>
+
 </html>
