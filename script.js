@@ -1,101 +1,113 @@
-const listTasks = 'http://localhost:9090/api/taches/';
-// SCRIPT POUR PROJET JS
+// ========================================================= //
+//                 SCRIPT DU PROJET JavaScript               //
+//         GERBER KEVIN - BERNARD NGUYEN AS 2021-2022        //
+// ========================================================= //
 
-// Fonction principale qui affiche toute les tâches
+
+//  Fonction principale qui affiche toute les tâches
+
+const listTasks = 'http://localhost:9090/api/taches/';
+
 function displayTaskingsFromJson() {
     document.getElementById('task').value = "";
     fetch(listTasks)
-    .then(function(response){
+    .then(function(response)
+    {
         return response.json();
     })
-    .then(function(html){
-        // alert(html);
-        console.log("voici mon HTML ",html);
-        console.log("taille de mon HTML ",html.length);
+    .then(function(html)
+    {
+        console.log("there is my HTML page",html);
+        console.log("HTML size",html.length);
         document.getElementById("pending").innerHTML = "";
         document.getElementById("completed").innerHTML = "";
         
-        let nbreTacheEnCours= 0;
-        let nbreTacheTerminee= 0;
+        let nbOfPendingTasks = 0;
+        let nbOfFinishedTasks = 0;
     
-        for(task of html){
-
-            
+        for(task of html)
+        {
             if (task.terminee == false) 
             {
                 const areaTask = document.getElementById('pending');
                 areaTask.innerHTML += 
-                `<div class="task" id="zoneTache">
-                    <span class="classTask" id="taskname">► ${task.description}</span> 
+                `<div class="task" id="zoneTache" (onmouseover() && onkeypress) = "if(event.keyCode == 13) delete()">
+                    <span class="classTask" id="taskname"> ► ${task.description}</span> 
             
                     <div class="areabuttons">
-                        <button onclick="tacheTermine(${task.id})" id="cpt-button-done">Done</button>
-                        <button onclick="supprimerTache(${task.id})" id="cpt-button-del">Delete</button>
-                        <button onclick="modifierTache('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
+                        <button onclick="taskCompleted(${task.id})" id="cpt-button-done">Done</button>
+                        <button onclick="deleteTask(${task.id})" id="cpt-button-del">Delete</button>
+                        <button onclick="editTask('${task.description}', '${task.id}')" id="cpt-button-edit">Edit</button>
                     </div>
                 </div>`;
-                nbreTacheEnCours += 1;
+                nbOfPendingTasks += 1;
             } 
             else
             {
-            
                 const areaTask = document.getElementById('completed');
                 areaTask.innerHTML += `<div class="task" id="zoneTache">
                 <span class="classTaskCompt" id="taskname">${task.description}</span> 
             
                 <div class="areabuttons">
-                    <button onclick="supprimerTache(${task.id})"id="cpt-button-del">Delete</button>
+                    <button onclick="deleteTask(${task.id})"id="cpt-button-del">Delete</button>
                 </div>
                 </div>`;
-                nbreTacheTerminee += 1;
+                nbOfFinishedTasks += 1;
             }
         }
-
-        if (nbreTacheEnCours>0)
+        
+        if (nbOfPendingTasks>0)
         {
-            document.getElementById("messageDansTacheEnCours").style.display = 'none';
+            document.getElementById("messageInPendingTask").style.display = 'none';
+            document.getElementById("pending").style.display = 'block';
         } else
         {
-            document.getElementById("messageDansTacheEnCours").style.display = 'block';
+            document.getElementById("messageInPendingTask").style.display = 'block';
+            document.getElementById("pending").style.display = 'none';
         }
-
-        if(nbreTacheTerminee>0)
+        
+        if (nbOfFinishedTasks>0)
         {
-            document.getElementById("messageDansTacheTerminee").style.display = 'none';
+            document.getElementById("messageInDoneTask").style.display = 'none';
+            document.getElementById("completed").style.display = 'block';
         } else 
         {
-            document.getElementById("messageDansTacheTerminee").style.display = 'block';
+            document.getElementById("messageInDoneTask").style.display = 'block';
+            document.getElementById("completed").style.display = 'none';
         }
-        })
-        .catch(function(err){
+    })
+        .catch(function(err)
+        {
             console.log(err);
         });
    
 }
 
-
 displayTaskingsFromJson();
 
+// Fonction pour ajouter une tâche à la section 'Pending'
+// Saisie d'une nouvelle tâche
 
-
-
-
-// Fonction pour ajouter une tâche à la section 'En cours'
-// saisi d'une nouvelle tâche
-function ajouterTache() 
+function addTask() 
 {
+    // regexp qui accepte une chaine de caractères sans les symboles du clavier
+    const regexForTask = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{2,60}$/;
     let myTask = document.getElementById('task').value;
+
+    
     if (myTask === "") 
     {
-        alert("vous na'avez pas saisi de tâche !")
+        alert("Task is empty !");
+    }
+    else if (!myTask.match(regexForTask))
+    {
+        alert("Task does not match ! all symbols are not allowed ! ");
     }
     else
     {
-
         let newTask = {
             description: myTask,
         };
-  
         fetch(listTasks,
         {
             headers: {
@@ -104,7 +116,6 @@ function ajouterTache()
             },
             method: "POST",
             body: JSON.stringify(newTask)
-
         })
         .then(function(html)
         {
@@ -118,18 +129,15 @@ function ajouterTache()
         .catch(function(err)
         {
             console.log(err);
-        });    
-   
+        });
     }    
-    
-}    
+};
 
+// Fonction pour supprimer une tâche (avec un message de confirmation)
 
-// Fonction pour supprimer une tâche 
-// avec un message de confirmation
-function supprimerTache(id) {
-
-    if (confirm("Voulez-vous suppimer cette tâche ?"))
+function deleteTask(id)
+{
+    if (confirm("Are you sure you want to delete this task ?"))
     {
         fetch(listTasks+id, 
         {
@@ -144,19 +152,19 @@ function supprimerTache(id) {
             displayTaskingsFromJson();
         });
     }
+};
 
-}
+// fonction qui modifie la tâche à l'aide de la méthode prompt
 
-
-// fonction qui modifie la tâche à l'aide un prompt
-function modifierTache(tacheDescr, tacheID) 
+function editTask(tacheDescr, tacheID) 
 {
-    let tacheEdit = prompt(`Modifier votre tâche : ${tacheDescr}`);
+    let tacheEdit = prompt(`Modify the task : ${tacheDescr}`);
 
     let textetache = 
     {
         description: tacheEdit
-    }
+    };
+
     fetch(listTasks+tacheID, 
         {
         method: 'PUT',
@@ -170,12 +178,12 @@ function modifierTache(tacheDescr, tacheID)
         console.log(response);
         displayTaskingsFromJson();
     });
-}
+};
 
+// Fonction pour ajouter une tâche à la section 'Completed'
+// tâche terminée
 
-// Fonction pour ajouter une tâche à la section 'Terminé'
-// tâche terminée...
-function tacheTermine(id)
+function taskCompleted(id)
 {
     let newTask = 
     {
@@ -192,7 +200,5 @@ function tacheTermine(id)
     {   
         console.log(response);
         displayTaskingsFromJson();
-
     })
-}
-
+};

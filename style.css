@@ -1,3 +1,5 @@
+/*SCRIPT CSS POUR PROJET JS*/
+/*GERBER KEVIN - BERNARD NGUYEN AS 2021-2022*/
 *{
     padding:0;
     margin:0;
@@ -51,7 +53,7 @@ body {
 
 #newtask input{
     border-radius: 5px;
-    width: 70%;
+    width: 88%;
     height: 45px;
     font-size: 15px;
     border: 2px solid #d1d3d4;
@@ -179,6 +181,11 @@ body {
 
 }
 
+.classTaskCompt{
+    
+    text-decoration: line-through;
+
+}
 
 #completed{
     width: 100%;
@@ -189,7 +196,6 @@ body {
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
-
 
 
 img{
@@ -216,3 +222,16 @@ img{
     justify-content: flex-start
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+footer, #signature {
+    font-size: 15px;
+    text-align: center;
+    align-items: right;
+    justify-content: right;
+    margin-bottom: 10px;
+}
