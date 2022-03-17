@@ -78,35 +78,71 @@ displayTaskingsFromJson();
 // Fonction pour ajouter une tâche à la section 'Pending'
 // Saisie d'une nouvelle tâche
 
-function addTask() {
-    let myTask = document.getElementById('task').value;
+function addTask() 
+{
+    // const regexForTask = /[A-Za-z0-9' ,:;?!]*/;
+    // const regexForTask = /^[ a-zA-Z0-9]{2,10}$/;
+    const regexForTask = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.-\s]{2,60}$/;
 
-    if (!(myTask.match(/[A-Za-z0-9?./ ?!'+=:;,]{1,40}]/))) {
-        alert("Task is empty !")
+
+
+    let myTask = document.getElementById('task').value;
+    if (myTask === "") 
+    {
+        alert("Task is empty !");
     }
-    else {
+    else if (!myTask.match(regexForTask))
+    {
+        alert("Task does not match ! all symbols are not allowed ! ");
+    }
+    else
+    {
         let newTask = {
             description: myTask,
         };
         fetch(listTasks,
+        {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(newTask)
+        })
+        .then(function(html)
+        {
+            return html.json();
+        })
+        .then(function(html)
+        {
+            console.log(html);
+            displayTaskingsFromJson();
+        })
+        .catch(function(err)
+        {
+            console.log(err);
+        });
+    }
+};
+
+// Fonction pour supprimer une tâche (avec un message de confirmation)
+
+function deleteTask(id)
+{
+    if (confirm("Are you sure you want to delete this task ?"))
+    {
+        fetch(listTasks+id, 
+        {
+            method: 'DELETE',
+            headers: 
             {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify(newTask)
-            })
-            .then(function (html) {
-                return html.json();
-            })
-            .then(function (html) {
-                console.log(html);
-                displayTaskingsFromJson();
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
+                'Content-Type': 'application/json',
+            },
+        }).then(function(response) 
+        {
+            console.log(response);
+            displayTaskingsFromJson();
+        });
     }
 };
 
