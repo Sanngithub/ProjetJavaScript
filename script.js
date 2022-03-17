@@ -90,7 +90,7 @@ displayTaskingsFromJson();
 
 function addTask() 
 {
-
+    // regexp qui accepte une chaine de caractères sans les symboles du clavier
     const regexForTask = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{2,60}$/;
     let myTask = document.getElementById('task').value;
 
