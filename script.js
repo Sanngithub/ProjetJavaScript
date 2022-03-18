@@ -82,7 +82,7 @@ function addTask()
 {
     const regexForTask = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.-\s]{2,60}$/; // à supprimer
 
-    const regexForTask2 = /^[^\\\\<>/|]{2,60}$/;
+    const regexForTask2 = /^[^\\\^\\\\<>/|]{2,60}$/;
 
     let myTask = document.getElementById('task').value;
     if (myTask === "") 
