@@ -95,7 +95,7 @@ function addTask()
     }
     else if (!myTask.match(regexForTask2))
     {
-        alert("Symbols are not allowed !");
+        alert("Symbols '<>/|' are not allowed !");
     }
     else
     {
