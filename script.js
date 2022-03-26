@@ -4,9 +4,11 @@
 // ========================================================= //
 
 
-//  Fonction principale qui affiche toute les tâches
-
 const listTasks = 'http://localhost:9090/api/taches/';
+
+
+
+//  Fonction principale qui affiche toute les tâches
 
 function displayTaskingsFromJson() {
     document.getElementById('task').value = "";
@@ -75,9 +77,10 @@ function displayTaskingsFromJson() {
 
 displayTaskingsFromJson();
 
+
+
 // Fonction pour ajouter une tâche à la section 'Pending'
 // Saisie d'une nouvelle tâche
-
 function addTask() 
 {
     // pas nécéssaire comme regex...
@@ -124,8 +127,8 @@ function addTask()
     }
 };
 
-// Fonction pour supprimer une tâche (avec un message de confirmation)
 
+// Fonction pour supprimer une tâche (avec un message de confirmation)
 function deleteTask(id)
 {
     if (confirm("Are you sure you want to delete this task ?"))
@@ -145,8 +148,8 @@ function deleteTask(id)
     }
 };
 
-// Fonction pour supprimer une tâche (avec un message de confirmation)
 
+// Fonction pour supprimer une tâche (avec un message de confirmation)
 function deleteTask(id) {
     if (confirm("Are you sure you want to delete this task ?")) {
         fetch(listTasks + id,
@@ -163,8 +166,8 @@ function deleteTask(id) {
     }
 };
 
-// fonction qui modifie la tâche à l'aide de la méthode prompt
 
+// fonction qui modifie la tâche à l'aide de la méthode prompt
 function editTask(tacheDescr, tacheID) {
     let tacheEdit = prompt(`Modify the task : ${tacheDescr}`);
 
@@ -187,9 +190,9 @@ function editTask(tacheDescr, tacheID) {
         });
 };
 
+
 // Fonction pour ajouter une tâche à la section 'Completed'
 // tâche terminée
-
 function taskCompleted(id) {
     let newTask =
     {
