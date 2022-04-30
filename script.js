@@ -1,6 +1,6 @@
 // ========================================================= //
 //                 SCRIPT DU PROJET JavaScript               //
-//         GERBER KEVIN - BERNARD NGUYEN AS 2021-2022        //
+//       GERBER KEVIN - BERNARD NGUYEN DUT AS 2021-2022      //
 // ========================================================= //
 
 
